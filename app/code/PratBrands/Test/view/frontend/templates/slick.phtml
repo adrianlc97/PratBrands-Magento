@@ -1,0 +1,61 @@
+<div class="product-view-wrap-short-description">
+    <div class="short-description" itemprop="short-description">  
+        <h2 id="description-short"><?php echo (strtolower($block->getShortDescription())); ?></h2>
+        <button class="inputbutton">Ver Descripción Larga</button>
+    </div>
+    <div class="large-description" itemprop="large-description">  
+        <h2 id="description-large"><?php echo (strtolower($block->getDescription())); ?></h2>
+        <button class="inputbuttonlarge">Ver Descripción Corta</button>
+    </div>
+    <?php $product = $block->getProduct();?>
+<?php // echo $block->getProductEthical();?>
+<div>
+    <?php $data = explode(',',$block->getSize()); ?>
+
+    <?php if (count($data) && !empty($data[0])): ?>
+        <ul class="product-icons">
+            <?php foreach($data as $value):?>
+                <?php $attr = $product->getResource()->getAttribute('size'); ?>
+                <?php
+                if ($attr->usesSource()): ?>
+                    <?php $option_value = $attr->getSource()->getOptionText($value); ?>
+                    <li class="product-icons__li">
+                        <span class="product-icons__icon" style="background-image: url('/media/web/product-icons/icon-<?= $value ?>.svg')"></span>
+                        <p class="product-icons__label">
+                            <?= $option_value; ?>
+                        </p>
+                    </li>
+                <?php endif;?>
+            <?php endforeach;?>
+        </ul>
+    <?php endif; ?>
+</div>
+</div>
+
+<script type="text/x-magento-init">
+{
+ ".inputbutton": {
+ "PratBrands_Test/js/clicklong": { }
+ }
+}
+</script>
+
+<script type="text/x-magento-init">
+{
+ ".inputbuttonlarge": {
+ "PratBrands_Test/js/clickshort": { }
+ }
+}
+</script>
+
+<script>
+setInterval(
+function () {
+  var randomColor = Math.floor(Math.random()*16777215).toString(16);
+  document.body.style.backgroundColor = "#"+randomColor;
+},30000);
+</script>
+
+
+
+
